@@ -6,98 +6,39 @@
     <title>Sample HTML Page</title>
     <link href="game1.css" rel="stylesheet">
 </head>
-<body class="glitch-body">
-  <div class="site">
-    <h1 style="text-align: center; font-size: 100px;">HYBRID ESCAPE ROOM</h1>
-    <div class="game-container">
-        <h1 id="status" style="text-align: center; font-size: 50px;">WELCOME PLAYER</h1>
-        <button id="startBtn" style="display: block; margin: 20px auto;" class="site">BEGIN THE GAME</button>
-        <div class="timer" style="margin: 20px auto;">
-            Time: <span id="time">30:00</span>s
-        </div>
+<body>
+  <div>
+    <div class="timer" style="margin-left: 75%; font-size: 25px;">
+      Time: <span id="timer">30:00</span>s
+    </div>
   </div>
-
-</div>
-
 
 
 <script>
-let gameStarted = false;
-let countdownInterval;
-let timerInterval;
-
-let totalTime = 30 * 60; // 30 minutes in seconds
-
-const startBtn = document.getElementById("startBtn");
-const timeDisplay = document.getElementById("time");
-const statusText = document.getElementById("status");
-
-startBtn.addEventListener("click", startCountdown);
-
-function startCountdown() {
-  if (gameStarted) return;
-
-  startBtn.disabled = true;
-  let count = 3;
-  statusText.innerText = count;
-
-  countdownInterval = setInterval(() => {
-    count--;
-
-    if (count > 0) {
-      statusText.innerText = count;
-    } else if (count === 0) {
-      statusText.innerText = "GO!";
-    } else {
-      clearInterval(countdownInterval);
-      statusText.innerText = "PLAYING";
-      startGame();
-    }
-  }, 1000);
-}
-
-function startGame() {
-  gameStarted = true;
-  startTimer();
-  startGameLogic();
-}
+const TOTAL_TIME = 30 * 60; // 30 minutes in seconds
+let timeLeft = TOTAL_TIME;
 
 function startTimer() {
-  updateTimeDisplay();
-
-  timerInterval = setInterval(() => {
-    totalTime--;
-
-    updateTimeDisplay();
-
-    if (totalTime <= 0) {
-      endGame();
+  const interval = setInterval(() => {
+    if (timeLeft <= 0) {
+      clearInterval(interval);
+      document.getElementById("timer").textContent = "00:00";
+      alert("Time's up!");
+      return;
     }
+
+    timeLeft--;
+
+    const minutes = String(Math.floor(timeLeft / 60)).padStart(2, "0");
+    const seconds = String(timeLeft % 60).padStart(2, "0");
+
+    document.getElementById("timer").textContent = `${minutes}:${seconds}`;
   }, 1000);
 }
 
-function updateTimeDisplay() {
-  const minutes = Math.floor(totalTime / 60);
-  const seconds = totalTime % 60;
+// 🔥 Starts automatically when page loads
+window.addEventListener("load", startTimer);
 
-  timeDisplay.innerText = 
-    `${minutes}:${seconds.toString().padStart(2, "0")}`;
-}
-
-function startGameLogic() {
-  console.log("Game logic started");
-  // 👉 Your actual game logic here
-}
-
-function endGame() {
-  clearInterval(timerInterval);
-  statusText.innerText = "TIME UP!";
-  gameStarted = false;
-  startBtn.disabled = false;
-
-  totalTime = 30 * 60;
-  updateTimeDisplay();
-}
 </script>
 
 

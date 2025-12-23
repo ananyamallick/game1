@@ -6,57 +6,6 @@ body {
   overflow-x: hidden;
 }
 
-.glitch-body {
-  animation: screen-glitch 4s infinite;
-}
-
-.site {
-  padding: 80px;
-  animation: rgb-shift 2.5s infinite;
-}
-
-.site button {
-  background: #1a1a1a;
-  border: 2px solid #444;
-  color: white;
-  padding: 10px 20px;
-  font-size: 40px;
-  cursor: pointer;
-  transition: background 0.3s, border-color 0.3s;
-}
-
-/* RGB color split */
-@keyframes rgb-shift {
-  0% {
-    text-shadow: 0 0 red, 0 0 cyan;
-  }
-  20% {
-    text-shadow: -2px 0 red, 2px 0 cyan;
-  }
-  40% {
-    text-shadow: 2px -2px red, -2px 2px cyan;
-  }
-  60% {
-    text-shadow: -1px 1px red, 1px -1px cyan;
-  }
-  100% {
-    text-shadow: 0 0 red, 0 0 cyan;
-  }
-}
-
-/* Screen jitter */
-@keyframes screen-glitch {
-  0% { transform: translate(0); }
-  95% { transform: translate(0); }
-  96% { transform: translate(-2px, 2px); }
-  97% { transform: translate(2px, -2px); }
-  98% { transform: translate(-1px, 1px); }
-  99% { transform: translate(1px, -1px); }
-  100% { transform: translate(0); }
-}
-
-
-
 
 .game-container {
   text-align: center;
@@ -73,20 +22,6 @@ button {
   font-size: 1.2rem;
 }
 
-
-body {
-  font-family: Arial, sans-serif;
-  background: #111;
-  color: #fff;
-  text-align: center;
-  padding-top: 100px;
-}
-
-button {
-  padding: 12px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
 
 /* Modal background */
 .modal {
